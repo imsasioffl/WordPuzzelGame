@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import random
-
+# only made with Flask
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
