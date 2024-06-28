@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Hangman Game</h1>
+        <pre>{{ stage }}</pre>
+        <p>{{ guessed_letters | join(' ') }}</p>
+        {% if hint %}
+        <p class="hint"><strong>Hint:</strong> {{ hint }}</p>
+        {% endif %}
+        {% if message %}
+        <p><strong>{{ message }}</strong></p>
+        <div class="button-group">
+            <form action="/restart" method="get">
+                <button type="submit">Restart</button>
+            </form>
+            <form action="/quit" method="get">
+                <button type="submit">Quit</button>
+            </form>
+        </div>
+        {% else %}
+        <form action="/guess" method="POST">
+            <input type="text" name="letter" maxlength="1" required autofocus>
+            <button type="submit">Guess</button>
+        </form>
+        <div class="button-group">
+            <form action="/guess" method="POST">
+                <input type="hidden" name="letter" value="hint">
+                <button type="submit">Get Hint</button>
+            </form>
+            <form action="/restart" method="get">
+                <button type="submit">Restart</button>
+            </form>
+            <form action="/quit" method="get">
+                <button type="submit">Quit</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
